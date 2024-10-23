@@ -1,0 +1,87 @@
+.header {
+    margin-left: 70px;
+    margin-right: 70px;
+    position: relative;
+}
+
+.background-header img {
+    width: 100%;
+}
+
+.header-contents {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1.5vw;
+    max-width: 50%;
+    bottom: 10%;
+    left: 6vw;
+    animation: fadeIn 3s;
+}
+
+.header-contents h2 {
+    font-weight: 500;
+    color: white;
+    font-size: max(4.5vw, 22px);
+}
+
+.header-contents p {
+    color: white;
+    font-size: 1vw;
+}
+
+.header-contents button {
+    border: none;
+    color: #747474;
+    font-weight: 500;
+    padding: 1vw 2.3vw;
+    background: white;
+    font-size: max(1vw, 13px);
+    border-radius: 50px;
+}
+
+/* Tablet (dưới 1050px) */
+@media (max-width:1050px) {
+    .header {
+        height: 38vw;
+    }
+    .header-contents {
+        max-width: 45%;
+    }
+}
+
+/* Tablet nhỏ hoặc màn hình nhỏ hơn (dưới 750px) */
+@media (max-width:750px) {
+    .header-contents {
+        max-width: 55%;
+    }
+    .header-contents p {
+        display: none;
+    }
+    .header-contents button {
+        padding: 2vw 4vw;
+    }
+}
+
+/* Mobile (dưới 480px) */
+@media (max-width: 480px) {
+    .header {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .header-contents {
+        max-width: 80%;
+        left: 5vw;
+        bottom: 8%;
+        gap: 3vw;
+    }
+    .header-contents h2 {
+        font-size: max(7vw, 20px);
+        line-height: 1.2;
+    }
+    .header-contents button {
+        padding: 3vw 6vw;
+        font-size: max(3vw, 12px);
+    }
+}
