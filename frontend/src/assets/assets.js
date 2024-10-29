@@ -7,6 +7,7 @@ import basket_icon from "./basket_icon.png";
 import logo from "./logo.png";
 import header_img from "./header_img.png";
 import search_icon from "./search_icon.png";
+import cross_icon from "./cross_icon.png";
 import food_41 from "./41.jpg";
 import food_42 from "./42.jpg";
 import food_43 from "./43.jpg";
@@ -20,6 +21,7 @@ export const assets = {
   basket_icon,
   header_img,
   search_icon,
+  cross_icon
 };
 
 export const menu_list = [
