@@ -3,6 +3,7 @@ import { menu_list } from "../../assets/assets";
 import ExploreMenu from "../../Components/ExploreMenu/ExploreMenu";
 
 const Menu = () => {
+  console.log(menu_list);
   return (
     <div>
       <ExploreMenu category={"All"} />

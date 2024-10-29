@@ -2,7 +2,7 @@ import React from "react";
 import "./FoodItem.css";
 
 const FoodItem = ({ id, name, price, discription, rate, image }) => {
-  // console.log(discription);
+  // console.log(image);
   return (
     <div className="food-item-container">
       <div className="food-item-image-wrapper">
@@ -15,7 +15,7 @@ const FoodItem = ({ id, name, price, discription, rate, image }) => {
         <p className="food-item-price">
           {price},000<i>vnd</i>
         </p>
-        <p className="food-item-disc">{discription}</p>
+        {/* <p className="food-item-disc">{discription}</p> */}
         {/* <p className="plus">+</p> */}
       </div>
     </div>
