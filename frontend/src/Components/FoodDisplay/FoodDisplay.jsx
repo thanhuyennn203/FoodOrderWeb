@@ -6,7 +6,6 @@ import { FaBowlFood } from "react-icons/fa6";
 
 const FoodDisplay = ({ category }) => {
   // const { food_list } = useContext(StoreContext);
-  // console.log(food_list);
 
   const [food_list, setFoodList] = useState([]);
 
@@ -18,7 +17,7 @@ const FoodDisplay = ({ category }) => {
         setFoodList(data);
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   return (
     <div className="food-display" id="food-display">

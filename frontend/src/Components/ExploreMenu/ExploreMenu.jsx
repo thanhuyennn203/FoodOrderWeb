@@ -10,7 +10,7 @@ const ExploreMenu = ({ category, setCategory }) => {
       .then((res) => res.json())
       .then((data) => {
         setMenuList(data); // Cập nhật state với dữ liệu mới
-        console.log(data); // Hiển thị dữ liệu
+        // console.log(data); // Hiển thị dữ liệu
       })
       .catch((err) => console.log(err));
   }, []);
@@ -24,13 +24,12 @@ const ExploreMenu = ({ category, setCategory }) => {
 
       <div className="menu-list">
         {menu_list.map((item, index) => {
-          console.log(item.thumnail);
-          const menuPath = item.thumnail + ".jpg";
+          const menuPath = item.thumbnail + ".jpg";
           return (
             <div
               onClick={() =>
                 setCategory((prev) =>
-                  prev === item.menu_id ? "All" : item.menu_id
+                  prev === item.category_id ? "All" : item.category_id
                 )
               }
               key={index}
@@ -38,7 +37,7 @@ const ExploreMenu = ({ category, setCategory }) => {
             >
               <div className="menu-img-container">
                 <img
-                  className={category === item.menu_id ? "active" : ""}
+                  className={category === item.category_id ? "active" : ""}
                   src={menuPath}
                   alt=""
                 />

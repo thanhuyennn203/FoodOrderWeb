@@ -33,7 +33,6 @@ const StoreContextProvider = (props) => {
     removeFromCart,
     getTotalCartAmount,
   };
-  // console.log(food_list);
 
   return (
     <StoreContext.Provider value={contextValue}>

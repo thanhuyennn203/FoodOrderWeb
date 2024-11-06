@@ -188,3 +188,12 @@ values
 ( 3, 'Sương Sa Hột Lựu', 35.00, '79', 'Thạch sương sa dẻo mềm, kết hợp với hột lựu giòn và nước cốt dừa béo ngậy, tạo nên món ăn mát lạnh và ngon miệng.', 0),
 ( 3, 'Kem Trà Xanh', 45.00, '80', 'Kem vị trà xanh mát lạnh, thơm nồng hương trà đặc trưng, kết hợp với chút sữa tươi ngọt dịu, tạo nên món tráng miệng nhẹ nhàng.', 0);
 
+insert into role
+value (1,"admin"), (2,"staff"),(3,"user");
+
+alter table category
+add column thumbnail varchar(255);
+
+update category 
+set thumbnail = "menu_1"
+where category_id = 1;
