@@ -16,12 +16,14 @@ import food_45 from "./45.jpg";
 import food_46 from "./46.jpg";
 import food_47 from "./47.jpg";
 import food_80 from "./80.jpg";
+import user_icon from "./user_icon.png"
 export const assets = {
   logo,
   basket_icon,
   header_img,
   search_icon,
-  cross_icon
+  cross_icon,
+  user_icon
 };
 
 export const menu_list = [

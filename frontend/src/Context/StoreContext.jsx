@@ -7,23 +7,23 @@ const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({}); // State to keep track of items in the cart
 
   const removeFromCart = (food_id) => {
-    setCartItems((prev) => {
-      const newCart = { ...prev };
-      if (newCart[food_id]) {
-        delete newCart[food_id]; // Remove the item if it exists in the cart
-      }
-      return newCart;
-    });
+    // setCartItems((prev) => {
+    //   const newCart = { ...prev };
+    //   if (newCart[food_id]) {
+    //     delete newCart[food_id]; // Remove the item if it exists in the cart
+    //   }
+    //   return newCart;
+    // });
   };
 
   const getTotalCartAmount = () => {
-    return Object.keys(cartItems).reduce((total, food_id) => {
-      const item = food_list.find((food) => food.food_id === parseInt(food_id));
-      if (item) {
-        return total + item.food_price * cartItems[food_id];
-      }
-      return total;
-    }, 0);
+    // return Object.keys(cartItems).reduce((total, food_id) => {
+    //   const item = food_list.find((food) => food.food_id === parseInt(food_id));
+    //   if (item) {
+    //     return total + item.food_price * cartItems[food_id];
+    //   }
+    //   return total;
+    // }, 0);
   };
 
   const contextValue = {
