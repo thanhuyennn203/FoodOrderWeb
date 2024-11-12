@@ -6,7 +6,7 @@ const ExploreMenu = ({ category, setCategory }) => {
   const [menu_list, setMenuList] = useState([]); // Khai báo state để lưu menu_list
 
   useEffect(() => {
-    fetch("http://localhost:8801/category")
+    fetch("http://localhost:8801/api/category")
       .then((res) => res.json())
       .then((data) => {
         setMenuList(data); // Cập nhật state với dữ liệu mới

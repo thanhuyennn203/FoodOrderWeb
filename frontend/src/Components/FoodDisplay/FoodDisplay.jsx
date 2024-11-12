@@ -10,7 +10,7 @@ const FoodDisplay = ({ category }) => {
   const [food_list, setFoodList] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8801/product")
+    fetch("http://localhost:8801/api/products")
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);

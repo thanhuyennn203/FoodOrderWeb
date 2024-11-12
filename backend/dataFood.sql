@@ -197,3 +197,15 @@ add column thumbnail varchar(255);
 update category 
 set thumbnail = "menu_1"
 where category_id = 1;
+
+update category 
+set thumbnail = "menu_2"
+where category_id = 2;
+
+update category 
+set thumbnail = "menu_3"
+where category_id = 3;
+
+update category 
+set thumbnail = "menu_4"
+where category_id = 4;

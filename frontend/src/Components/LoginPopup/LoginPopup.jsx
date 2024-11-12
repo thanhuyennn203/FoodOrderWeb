@@ -13,7 +13,7 @@ const LoginPopup = ({ setShowLogin }) => {
       if (currState === "Sign Up") {
         //send user info to server
         const data = { name, email, password };
-        fetch("http://localhost:8801/register", {
+        fetch("http://localhost:8801/api/register", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -36,7 +36,7 @@ const LoginPopup = ({ setShowLogin }) => {
       } else {
         //sign in
         const user = { email, password };
-        fetch("http://localhost:8801/login", {
+        fetch("http://localhost:8801/api/login", {
           method: "POST",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify(user),
