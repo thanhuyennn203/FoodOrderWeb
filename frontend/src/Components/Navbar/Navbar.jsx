@@ -20,11 +20,18 @@ const Navbar = ({setShowLogin}) => {
       </ul>
       <div className="navbar-right">
         <img src={assets.search_icon} alt="" />
-        <Link to='/cart' className='navbar-search-icon'>
+
+        <Link to='/Cart' className='navbar-search-icon'>
           <img src={assets.basket_icon} alt="" />
           <div className={getTotalCartAmount()>0?"dot":""}></div>
         </Link>
+
         <button onClick={()=>setShowLogin(true)}>sign in</button>
+
+        <Link to='/MyAccount' className='navbar-user-icon'>
+          <img src={assets.user_icon} alt="" />
+        </Link>
+        
       </div>
     </div>
   )

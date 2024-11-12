@@ -33,7 +33,13 @@
 .navbar-search-icon {
     position: relative;
 }
-
+.navbar-user-icon img{
+    width: 31px;
+    height: 31px;
+    position: relative;
+    margin-top: 8px;
+    margin-right: 10px;
+}
 .navbar-search-icon .dot {
     position: absolute;
     min-width: 10px;
@@ -44,8 +50,8 @@
     right: -8px;
 }
 
+
 .navbar-right button {
-    /* background: transparent; */
     font-size: 16px;
     color: #49557E;
     border: 1px solid #FF4C24;
