@@ -1,19 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./ExploreMenu.css";
+import { StoreContext } from "../../Context/StoreContext";
 //import { menu_list } from "../../assets/assets";
 
 const ExploreMenu = ({ category, setCategory }) => {
-  const [menu_list, setMenuList] = useState([]); // Khai báo state để lưu menu_list
-
-  useEffect(() => {
-    fetch("http://localhost:8801/api/category")
-      .then((res) => res.json())
-      .then((data) => {
-        setMenuList(data); // Cập nhật state với dữ liệu mới
-        // console.log(data); // Hiển thị dữ liệu
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const { menu_list } = useContext(StoreContext);
   // console.log(menu_list);
   return (
     <div className="explore-menu" id="explore-menu">
