@@ -1,10 +1,10 @@
 /* Home.css */
 .go-to-top {
     position: fixed;
-    bottom: 10px; /* Đặt cách đáy trang 20px */
-    right: 20px; /* Đặt cách phải trang 20px */
-    background-color: #ff7700; /* Màu nền nút */
-    color: white; /* Màu chữ */
+    bottom: 10px; 
+    right: 20px; 
+    background-color: #ff7700; 
+    color: white;
     border: none;
     padding: 10px 15px;
     border-radius: 5px;

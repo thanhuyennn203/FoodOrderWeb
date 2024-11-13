@@ -5,10 +5,10 @@ import { FaBowlFood } from "react-icons/fa6";
 
 const FoodDisplay = ({ category }) => {
   const [food_list, setFoodList] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
-  const itemsPerPage = 8; // Số lượng item mỗi trang
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+  const [searchQuery, setSearchQuery] = useState(""); 
 
-  // Fetch danh sách food từ API
   useEffect(() => {
     fetch("http://localhost:8801/api/products")
       .then((res) => res.json())
@@ -18,25 +18,23 @@ const FoodDisplay = ({ category }) => {
       .catch((err) => console.log(err));
   }, []);
 
-  // Đặt lại currentPage khi category thay đổi
   useEffect(() => {
-    setCurrentPage(1); // Reset về trang đầu
+    setCurrentPage(1);
   }, [category]);
 
-  // Lọc danh sách food theo category
-  const filteredFoodList = food_list.filter(
-    (item) => category === "All" || item.category_id === category
-  );
-
-  // Tính toán item cho trang hiện tại
+  // Filter the food list based on category and search query
+  const filteredFoodList = food_list.filter((item) => {
+    const matchesCategory = category === "All" || item.category_id === category;
+    const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+  // next page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredFoodList.slice(indexOfFirstItem, indexOfLastItem);
 
-  // Số trang tổng cộng
   const totalPages = Math.ceil(filteredFoodList.length / itemsPerPage);
 
-  // Hàm chuyển trang
   const handlePrevious = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
@@ -47,10 +45,18 @@ const FoodDisplay = ({ category }) => {
 
   return (
     <div className="food-display" id="food-display">
-      <h2>
+      {/* <h2>
         <FaBowlFood />
         Top food
-      </h2>
+      </h2> */}
+
+      <input
+        type="text"
+        placeholder="Search for food..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="search-input"
+      />
 
       <div className="food-display-list">
         {currentItems.map((item, index) => {
@@ -68,14 +74,13 @@ const FoodDisplay = ({ category }) => {
         })}
       </div>
 
-      {/* Nút điều hướng phân trang */}
       <div className="pagination">
         <button
           className="pagination-button"
           onClick={handlePrevious}
           disabled={currentPage === 1}
         >
-          &lt; {/* Nút trái */}
+          &lt;
         </button>
         <span className="pagination-info">
           Page {currentPage} of {totalPages}
@@ -85,7 +90,7 @@ const FoodDisplay = ({ category }) => {
           onClick={handleNext}
           disabled={currentPage === totalPages || totalPages === 0}
         >
-          &gt; {/* Nút phải */}
+          &gt;
         </button>
       </div>
     </div>
