@@ -17,73 +17,47 @@ const MyAccount = () => {
               >
                 General
               </a>
+              <div className="card-body media align-items-center">
+                <img
+                  src={assets.user_icon}
+                  alt=""
+                  className="d-block ui-w-80"
+                />
+                <div className="media-body ml-4">
+                  <label className="btn btn-outline-primary">
+                    Upload new photo
+                    <input type="file" className="account-settings-fileinput" />
+                  </label>{" "}
+                  &nbsp;
+                  <div className="text-light small mt-1">
+                    Allowed JPG, GIF or PNG. Max size of 800K
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div className="col-md-9">
             <div className="tab-content">
               {/* General Tab */}
               <div className="tab-pane fade active show" id="account-general">
-                <div className="card-body media align-items-center">
-                  <img
-                    src={assets.user_icon}
-                    alt="user"
-                    className="d-block ui-w-80"
-                  />
-                  <div className="media-body ml-4">
-                    <label className="btn btn-outline-primary">
-                      Upload new photo
-                      <input
-                        type="file"
-                        className="account-settings-fileinput"
-                      />
-                    </label>{" "}
-                    &nbsp;
-                    <button
-                      type="button"
-                      className="btn btn-default md-btn-flat"
-                    >
-                      Reset
-                    </button>
-                    <div className="text-light small mt-1">
-                      Allowed JPG, GIF or PNG. Max size of 800K
-                    </div>
-                  </div>
-                </div>
                 <hr className="border-light m-0" />
                 <div className="card-body">
                   <div className="form-group">
-                    <label className="form-label">Full Name</label>
-                    <input
-                      type="text"
-                      name="name"
-                      className="form-control mb-1"
-                    />
+                    <label className="form-label">Username</label>
+                    <input type="text" className="form-control mb-1" />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Phone number</label>
-                    <input type="tel" name="phone" className="form-control" />
+                    <label className="form-label">Name</label>
+                    <input type="text" className="form-control" />
                   </div>
                   <div className="form-group">
                     <label className="form-label">E-mail</label>
-                    <input
-                      type="text"
-                      name="email"
-                      readOnly
-                      className="form-control mb-1"
-                    />
+                    <input type="text" className="form-control mb-1" />
                     <div className="alert alert-warning mt-3">
                       Your email is not confirmed. Please check your inbox.
                       <br />
                       <a href="javascript:void(0)">Resend confirmation</a>
                     </div>
-                  </div>
-                  <div className="form-group">
-                    <label className="form-label">Company</label>
-                    <input
-                      type="text"
-                      name="company"
-                      className="form-control"
-                    />
                   </div>
                 </div>
               </div>
