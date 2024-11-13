@@ -2,18 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const app = express();
-const session = require("express-session");
 const userRoutes = require("./routes/userRoutes.js");
 const productRoutes = require("./routes/productRoutes.js");
 
-app.use(
-  session({
-    secret: "mySecret", // Dùng để mã hóa session ID
-    resave: false, // Không lưu lại session nếu không thay đổi
-    saveUninitialized: false, // Không lưu phiên chưa được khởi tạo
-    cookie: { secure: false }, // Set to `true` nếu sử dụng HTTPS
-  })
-);
 app.use(cors());
 app.use(express.json());
 

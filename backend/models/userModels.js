@@ -2,12 +2,14 @@ const db = require("../db");
 
 //login for user
 function getUserByEmail(email) {
+  console.log(email);
   return new Promise((resolve, reject) => {
     const sql = "SELECT * FROM user WHERE email = ?";
-    db.query(sql, [email], (err, results) => {
+    db.query(sql, email, (err, results) => {
       if (err) {
         return reject(err);
       }
+      console.log(results);
       resolve(results);
     });
   });

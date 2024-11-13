@@ -1,3 +1,6 @@
+.cart-items-title img{
+    width: 60px;
+}
 .cart {
     margin-left: 70px;
     margin-right: 70px;
@@ -17,7 +20,14 @@
     font-size: max(1vw, 12px);
 }
 
-
+.quantity{
+    display: flex;
+}
+.quantity p{
+    display: block;
+    padding: 10px;
+    font-size: 15px;
+}
 
 
 .cart-bottom {

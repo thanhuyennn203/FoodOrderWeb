@@ -23,8 +23,7 @@ async function loginUser(req, res) {
         .status(400)
         .json({ success: false, message: "Wrong password!" });
     }
-    req.session.user = user;
-    res.status(200).json({ success: true, message: "Sin in successfully!" });
+    res.status(200).json(user.email);
   } catch (err) {
     res.status(400).json({ succes: false, message: "Error during login!" });
   }
@@ -61,16 +60,25 @@ async function registerUser(req, res) {
   }
 }
 
-// function logoutUser(req, res) {
-//   req.session.destroy((err) => {
-//     if (err) {
-//       return res
-//         .status(500)
-//         .json({ success: false, message: "Failed to log out!" });
-//     }
-//     res
-//       .status(200)
-//       .json({ success: true, message: "Logged out successfully!" });
-//   });
-// }
-module.exports = { loginUser, registerUser };
+async function userAccountInfo(req, res) {
+  try {
+    const { email } = req.body;
+    console.log("email in server: ", email);
+
+    const getUser = await userModel.getUserByEmail(email);
+
+    console.log(getUser);
+    const user = getUser[0];
+    const results = {
+      name: user.full_name,
+      phone: user.phone_number,
+      company: user.company,
+    };
+    return res.status(200).json(results);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to get account information!" });
+  }
+}
+module.exports = { loginUser, registerUser, userAccountInfo };

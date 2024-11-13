@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./LoginPopup.css";
 import { assets } from "../../assets/assets";
+import { StoreContext } from "../../Context/StoreContext";
 
 const LoginPopup = ({ setShowLogin }) => {
   const [currState, setCurrState] = useState("Sign Up");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login, user } = useContext(StoreContext);
 
   const handleSubmit = () => {
     if (password.length != 0 && email != 0) {
       if (currState === "Sign Up") {
-        //send user info to server
+        //register
         const data = { name, email, password };
         fetch("http://localhost:8801/api/register", {
           method: "POST",
@@ -27,19 +29,18 @@ const LoginPopup = ({ setShowLogin }) => {
             return response.json();
           })
           .then((data) => {
-            console.log(data);
             setCurrState("Login");
           })
           .catch((err) => {
             console.log("ERR: ", err);
           });
       } else {
-        //sign in
-        const user = { email, password };
+        //log in
+        const userLogin = { email, password };
         fetch("http://localhost:8801/api/login", {
           method: "POST",
           headers: { "Content-type": "application/json" },
-          body: JSON.stringify(user),
+          body: JSON.stringify(userLogin),
         })
           .then((response) => {
             if (!response.ok) {
@@ -47,14 +48,11 @@ const LoginPopup = ({ setShowLogin }) => {
             }
             return response.json();
           })
-          .then((user) => {
-            if (user.length !== 0) {
-              console.log("successfully");
-              console.log(user);
-              setShowLogin(false);
-            } else {
-              console.log("You don't hava acc");
-            }
+          .then((data) => {
+            alert("login");
+            setShowLogin(false);
+            console.log("call login local: ", data);
+            login(data);
           })
           .catch((err) => {
             console.log("ERR: ", err);
@@ -62,6 +60,7 @@ const LoginPopup = ({ setShowLogin }) => {
       }
     }
   };
+
   return (
     <div className="login-popup">
       <div className="login-popup-container">
