@@ -1,11 +1,53 @@
-import React, { useContext, useEffect, useState } from "react";
-import { StoreContext } from "../../Context/StoreContext";
+import React, { useEffect, useState } from "react";
 import FoodItem from "../FoodItem/FoodItem";
 import "./FoodDisplay.css";
 import { FaBowlFood } from "react-icons/fa6";
 
 const FoodDisplay = ({ category }) => {
-  const { food_list } = useContext(StoreContext);
+  const [food_list, setFoodList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:8801/api/products")
+      .then((res) => res.json())
+      .then((data) => {
+        setFoodList(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [category]);
+
+  // Filter the food list based on category and search query
+  const filteredFoodList = food_list.filter((item) => {
+    const matchesCategory = category === "All" || item.category_id === category;
+    const matchesSearch = item.name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  // next page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredFoodList.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+
+  const totalPages = Math.ceil(filteredFoodList.length / itemsPerPage);
+
+  const handlePrevious = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const handleNext = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
 
   return (
     <div className="food-display" id="food-display">
