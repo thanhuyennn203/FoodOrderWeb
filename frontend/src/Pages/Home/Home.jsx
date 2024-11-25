@@ -22,12 +22,12 @@ const Home = () => {
       <FoodDisplay category={category} />
 
       {/* Nút Go to Top */}
-      <button 
-        className="go-to-top" 
-        onClick={scrollToTop} 
+      <button
+        className="go-to-top"
+        onClick={scrollToTop}
         aria-label="Go to top"
       >
-        ↑ Go to Top
+        ↑
       </button>
     </div>
   );

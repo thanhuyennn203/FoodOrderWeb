@@ -23,7 +23,8 @@ async function loginUser(req, res) {
         .status(400)
         .json({ success: false, message: "Wrong password!" });
     }
-    res.status(200).json(user.email);
+    console.log("user loged: ", user.user_id);
+    res.status(200).json(user.user_id);
   } catch (err) {
     res.status(400).json({ succes: false, message: "Error during login!" });
   }
@@ -62,23 +63,38 @@ async function registerUser(req, res) {
 
 async function userAccountInfo(req, res) {
   try {
-    const { email } = req.body;
-    console.log("email in server: ", email);
+    const { userId } = req.body;
 
-    const getUser = await userModel.getUserByEmail(email);
+    const getUser = await userModel.getUserById(userId);
+    // console.log(getUser);
 
-    console.log(getUser);
-    const user = getUser[0];
-    const results = {
-      name: user.full_name,
-      phone: user.phone_number,
-      company: user.company,
-    };
-    return res.status(200).json(results);
+    return res.status(200).json(getUser);
   } catch (err) {
     res
       .status(500)
       .json({ success: false, message: "Failed to get account information!" });
   }
 }
-module.exports = { loginUser, registerUser, userAccountInfo };
+async function editAccount(req, res) {
+  try {
+    const { userInfo } = req.body;
+    console.log("edit user", userInfo);
+
+    const editSuccess = userModel.editUserAccount(
+      userInfo.company,
+      userInfo.email,
+      userInfo.fullname,
+      userInfo.phone
+    );
+
+    if (editSuccess) {
+      res.status(200).json({ succes: true, message: "Edited successfully!" });
+    }
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to edit account information!" });
+  }
+}
+
+module.exports = { loginUser, registerUser, userAccountInfo, editAccount };
