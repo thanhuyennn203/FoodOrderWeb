@@ -19,6 +19,9 @@ import food_80 from "./80.jpg";
 import user_icon from "./user_icon.png";
 import add_icon from "./add_icon.png";
 import remove_icon from "./remove_icon.png";
+import facebook from "./facebook_icon.png";
+import linkedin from "./linkedin_icon.png";
+import twitter from "./twitter_icon.png"
 
 export const assets = {
   logo,
@@ -29,6 +32,10 @@ export const assets = {
   user_icon,
   add_icon,
   remove_icon,
+  facebook,
+  linkedin,
+  twitter
+
 };
 
 export const menu_list = [

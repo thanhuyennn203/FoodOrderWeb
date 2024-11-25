@@ -53,11 +53,7 @@ const MyAccount = () => {
                   <div className="form-group">
                     <label className="form-label">E-mail</label>
                     <input type="text" className="form-control mb-1" />
-                    <div className="alert alert-warning mt-3">
-                      Your email is not confirmed. Please check your inbox.
-                      <br />
-                      <a href="javascript:void(0)">Resend confirmation</a>
-                    </div>
+                    
                   </div>
                 </div>
               </div>

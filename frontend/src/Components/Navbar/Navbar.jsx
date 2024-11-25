@@ -33,10 +33,10 @@ const Navbar = ({ setShowLogin }) => {
           onClick={() => setMenu("sale")}
           className={`${menu === "sale" ? "active" : ""}`}
         >
-          Product in Sale
+          Product in sale
         </a>
         <a
-          href="#app-download"
+          href="#Blogs"
           onClick={() => setMenu("Blogs")}
           className={`${menu === "Blogs" ? "active" : ""}`}
         >
@@ -54,12 +54,19 @@ const Navbar = ({ setShowLogin }) => {
           onClick={() => setMenu("join")}
           className={`${menu === "join" ? "active" : ""}`}
         >
-         Join with Us
+          Join with us
         </a>
+        <Link
+          to="/MyOrders"
+          onClick={() => setMenu("myOrders")}
+          className={`${menu === "myOrders" ? "active" : ""}`}
+        >
+          My Order
+        </Link>
 
       </ul>
       <div className="navbar-right">
-        
+
         <Link to="/Cart" className="navbar-search-icon">
           <img src={assets.basket_icon} alt="" />
           <div className={getTotalCartAmount() > 0 ? "dot" : ""}></div>

@@ -70,13 +70,13 @@ const Cart = () => {
             <hr />
             <div className="cart-total-details">
               <p>Delivery Fee</p>
-              <p>30,000 VND</p> {/* Delivery fee in VND */}
+              <p>0,000 VND</p> {/* Delivery fee in VND */}
             </div>
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
               <b>
-                {getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 30},000
+                {getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 0},000
                 VND
               </b>
             </div>

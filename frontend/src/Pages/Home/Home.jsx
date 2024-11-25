@@ -19,9 +19,9 @@ const Home = () => {
   return (
     <div>
       <Header />
-      
-      <ExploreMenu category={category} setCategory={setCategory} />
       <Panel />
+      <ExploreMenu category={category} setCategory={setCategory} />
+     
       <FoodDisplay category={category} />
 
       {/* Nút Go to Top */}
@@ -30,7 +30,7 @@ const Home = () => {
         onClick={scrollToTop} 
         aria-label="Go to top"
       >
-        ↑ Go to Top
+        ↑
       </button>
     </div>
   );
