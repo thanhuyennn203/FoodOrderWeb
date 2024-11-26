@@ -3,6 +3,7 @@ import "./LoginPopup.css";
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../Context/StoreContext";
 import { useNavigate } from "react-router-dom";
+import { showToast } from "../Notification/ToastProvider.jsx";
 
 const LoginPopup = ({ setShowLogin }) => {
   const [currState, setCurrState] = useState("Sign Up");
@@ -10,6 +11,7 @@ const LoginPopup = ({ setShowLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, user } = useContext(StoreContext);
+
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -27,14 +29,18 @@ const LoginPopup = ({ setShowLogin }) => {
         })
           .then((response) => {
             if (!response.ok) {
-              return Promise.reject("Failed...");
+              return response.json().then((error) => {
+                throw new Error(error.message || "Failed to register");
+              });
             }
             return response.json();
           })
           .then((data) => {
             setCurrState("Login");
+            showToast("Created account successfully!");
           })
           .catch((err) => {
+            showToast(err.message, "error");
             console.log("ERR: ", err);
           });
       } else {
@@ -47,17 +53,22 @@ const LoginPopup = ({ setShowLogin }) => {
         })
           .then((response) => {
             if (!response.ok) {
-              return Promise.reject("Failed...");
+              return response.json().then((error) => {
+                // Trích xuất thông báo lỗi chi tiết từ phản hồi của server (nếu có)
+                throw new Error(error.message || "Failed to login");
+              });
             }
             return response.json();
           })
           .then((data) => {
             setShowLogin(false);
+            showToast("Login Successful!", "success");
             navigate("/");
             login(data);
           })
           .catch((err) => {
-            console.log("ERR: ", err);
+            showToast(err.message, "error");
+            console.error("ERR: ", err);
           });
       }
     } else {

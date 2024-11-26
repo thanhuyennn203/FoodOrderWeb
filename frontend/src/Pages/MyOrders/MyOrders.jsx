@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./MyOrders.css";
 import { StoreContext } from "../../Context/StoreContext";
+import { showToast } from "../../Components/Notification/ToastProvider";
 
 const MyOrders = () => {
   const user = localStorage["user"];
@@ -14,13 +15,22 @@ const MyOrders = () => {
       },
       body: JSON.stringify({ user }),
     })
-      .then((res) => res.json())
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((error) => {
+            throw new Error(error.message || "Failed to login");
+          });
+        }
+        return response.json();
+      })
       .then((result) => {
         setData(result);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        showToast(err.message, "error");
+        console.log(err);
+      });
   }, []);
-  console.log("my order: ", data);
 
   if (data.length > 0) {
     return (

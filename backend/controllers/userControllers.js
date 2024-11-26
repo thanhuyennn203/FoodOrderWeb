@@ -1,6 +1,5 @@
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/userModels");
-//const session = require("express-session");
 
 async function loginUser(req, res) {
   try {
@@ -21,12 +20,14 @@ async function loginUser(req, res) {
     if (!isMatch) {
       return res
         .status(400)
-        .json({ success: false, message: "Wrong password!" });
+        .json({ success: false, message: "Wrong password or email!" });
     }
-    console.log("user loged: ", user.user_id);
-    res.status(200).json(user.user_id);
+
+    // Nếu đăng nhập thành công
+    res.status(200).json({ success: true, userId: user.user_id });
   } catch (err) {
-    res.status(400).json({ succes: false, message: "Error during login!" });
+    // Xử lý lỗi server
+    res.status(500).json({ success: false, message: "Error during login!" });
   }
 }
 
@@ -40,7 +41,7 @@ async function registerUser(req, res) {
     if (getEmail.length !== 0) {
       return res
         .status(400)
-        .json({ success: false, message: "Email already exist!" });
+        .json({ success: false, message: "Email already existed!" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -52,12 +53,10 @@ async function registerUser(req, res) {
         .status(200)
         .json({ success: true, message: "Create new user successfully!" });
     } catch (error) {
-      return res.status(500).json("Fail to create new user!");
+      return res.status(500).json("Failed to create new user!");
     }
   } catch (err) {
-    res
-      .json(500)
-      .json({ succes: false, message: "Failed to check email existed!" });
+    res.json(500).json({ succes: false, message: "Unexpected server error!" });
   }
 }
 
@@ -75,6 +74,7 @@ async function userAccountInfo(req, res) {
       .json({ success: false, message: "Failed to get account information!" });
   }
 }
+
 async function editAccount(req, res) {
   try {
     const { userInfo } = req.body;

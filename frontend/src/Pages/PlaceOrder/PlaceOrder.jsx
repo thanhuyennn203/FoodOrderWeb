@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./PlaceOrder.css";
 import { StoreContext } from "../../Context/StoreContext";
 import { useNavigate } from "react-router-dom";
+import { showToast } from "../../Components/Notification/ToastProvider";
 
 const PlaceOrder = () => {
   const navigate = useNavigate();
@@ -33,8 +34,9 @@ const PlaceOrder = () => {
 
         const data = { userId, amount, orderInfo, orderItems };
 
-        console.log(data);
+        console.log("order infor: ", data);
 
+        //order
         fetch("http://localhost:8801/api/order", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -42,15 +44,19 @@ const PlaceOrder = () => {
         })
           .then((response) => {
             if (!response.ok) {
-              console.log(response);
-              return Promise.reject("Failed...");
+              return response.json().then((error) => {
+                throw new Error(error.message || "Failed to order");
+              });
             }
+            return response.json();
           })
           .then((data) => {
+            showToast("ordered successfully", "success");
             setCartItems({});
             navigate("/myOrder");
           })
           .catch((err) => {
+            showToast(err.message, "error");
             console.log("ERR: ", err);
           });
       } else {

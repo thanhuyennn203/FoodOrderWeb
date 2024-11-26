@@ -61,6 +61,18 @@ const StoreContextProvider = (props) => {
       .catch((err) => console.log(err));
   }, []);
 
+  //get top food list
+  const [top_food_list, setTopFoodList] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:8801/api/topProducts")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("top food", data);
+        setTopFoodList(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   //cart
   const [cartItems, setCartItems] = useState({}); // State to keep track of items in the cart
   const removeFromCart = (itemId) => {
@@ -76,7 +88,7 @@ const StoreContextProvider = (props) => {
   };
 
   useEffect(() => {
-    console.log(cartItems);
+    // console.log(cartItems);
   }, [cartItems]);
 
   const getTotalCartAmount = () => {
@@ -99,6 +111,7 @@ const StoreContextProvider = (props) => {
     setCartItems, // This will allow you to update cartItems directly if needed
     removeFromCart,
     getTotalCartAmount,
+    top_food_list,
   };
 
   return (
