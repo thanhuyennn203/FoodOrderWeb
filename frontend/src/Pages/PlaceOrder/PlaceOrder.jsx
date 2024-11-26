@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 const PlaceOrder = () => {
   const navigate = useNavigate();
-  const { getTotalCartAmount, cartItems, food_list } = useContext(StoreContext);
+  const { getTotalCartAmount, cartItems, setCartItems, food_list } =
+    useContext(StoreContext);
   const { user } = useContext(StoreContext);
   const [orderInfo, setOrderInfo] = useState({
     fullname: "",
@@ -46,6 +47,7 @@ const PlaceOrder = () => {
             }
           })
           .then((data) => {
+            setCartItems({});
             navigate("/myOrder");
           })
           .catch((err) => {
@@ -115,7 +117,7 @@ const PlaceOrder = () => {
           <h2>Cart Totals</h2>
           <div>
             <div className="cart-total-details">
-              <p>Subtotal: {getTotalCartAmount()}</p>
+              <p>Subtotal: {getTotalCartAmount()},000</p>
             </div>
             <hr />
             <div className="cart-total-details">

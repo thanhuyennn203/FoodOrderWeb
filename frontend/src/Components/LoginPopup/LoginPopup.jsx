@@ -61,6 +61,7 @@ const LoginPopup = ({ setShowLogin }) => {
           });
       }
     } else {
+      alert("Please fill all field.");
     }
   };
 

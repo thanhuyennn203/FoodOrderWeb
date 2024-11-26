@@ -6,7 +6,7 @@ import { FaBowlFood } from "react-icons/fa6";
 const FoodDisplay = ({ category }) => {
   const [food_list, setFoodList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12;
+  const itemsPerPage = 10;
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
