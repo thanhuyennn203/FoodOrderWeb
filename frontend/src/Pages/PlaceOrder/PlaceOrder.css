@@ -1,4 +1,9 @@
+
 .place-order{
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-top: 50px;
+    padding-bottom: 10px;
     display: flex;
     align-items: start;
     justify-content: space-between;

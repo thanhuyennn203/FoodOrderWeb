@@ -1,6 +1,6 @@
 .login-popup{
-    position: absolute;
-    z-index: 1;
+    position: fixed;
+    z-index: 100;
     width: 100%;
     height: 100%;
     background-color: #00000090;
@@ -45,7 +45,7 @@
     padding: 10px;
     border-radius: 4px;
     color: white;
-    background-color: #FF4C24;
+    background-color:  rgb(82, 100, 0);
     font-size: 15px;
     cursor: pointer;
 }
@@ -62,7 +62,7 @@
 
 
 .login-popup p span{
-    color: #FF4C24;
+    color: rgb(253, 16, 16);
     font-weight: 500;
     cursor: pointer;
 }
