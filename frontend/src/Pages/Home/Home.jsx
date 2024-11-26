@@ -8,11 +8,10 @@ import Panel from "../../Components/Panel/Pane";
 const Home = () => {
   const [category, setCategory] = useState("All");
 
- 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth", 
+      behavior: "smooth",
     });
   };
 
@@ -21,13 +20,13 @@ const Home = () => {
       <Header />
       <Panel />
       <ExploreMenu category={category} setCategory={setCategory} />
-     
+
       <FoodDisplay category={category} />
 
       {/* Nút Go to Top */}
-      <button 
-        className="go-to-top" 
-        onClick={scrollToTop} 
+      <button
+        className="go-to-top"
+        onClick={scrollToTop}
         aria-label="Go to top"
       >
         ↑

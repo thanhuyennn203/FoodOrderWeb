@@ -7,7 +7,7 @@ const FoodDisplay = ({ category }) => {
   const [food_list, setFoodList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-  const [searchQuery, setSearchQuery] = useState(""); 
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:8801/api/products")
@@ -25,14 +25,19 @@ const FoodDisplay = ({ category }) => {
   // Filter the food list based on category and search query
   const filteredFoodList = food_list.filter((item) => {
     const matchesCategory = category === "All" || item.category_id === category;
-    const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = item.name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
-  
+
   // next page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredFoodList.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredFoodList.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   const totalPages = Math.ceil(filteredFoodList.length / itemsPerPage);
 

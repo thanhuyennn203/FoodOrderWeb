@@ -1,6 +1,5 @@
 const db = require("../db");
 
-//login for user
 function getUserByEmail(email) {
   console.log(email);
   return new Promise((resolve, reject) => {
@@ -9,7 +8,7 @@ function getUserByEmail(email) {
       if (err) {
         return reject(err);
       }
-      console.log(results);
+      // console.log(results);
       resolve(results);
     });
   });
@@ -23,10 +22,40 @@ function addNewUser([name, email, hashedPassword]) {
       if (err) {
         return reject(err);
       } else {
+        console.log("success");
         resolve(results);
       }
     });
   });
 }
 
-module.exports = { getUserByEmail, addNewUser };
+function getUserById(userId) {
+  return new Promise((resolve, reject) => {
+    const sql = "SELECT * FROM user WHERE user_id = ?";
+    db.query(sql, [userId], (err, res) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(res);
+      }
+    });
+  });
+}
+
+function editUserAccount(company, email, fullname, phone) {
+  return new Promise((resolve, reject) => {
+    const sql =
+      "UPDATE `user` SET `full_name`= ?,`phone_number`=?,`company`=? WHERE `email`=?";
+
+    db.query(sql, [fullname, phone, company, email], (err, res) => {
+      if (err) {
+        return reject(err);
+      } else {
+        console.log("Edit successfully.");
+        resolve(res);
+      }
+    });
+  });
+}
+
+module.exports = { getUserByEmail, addNewUser, editUserAccount, getUserById };
