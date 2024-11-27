@@ -47,7 +47,7 @@ const MyAccount = () => {
       body: JSON.stringify({ userInfo }),
     })
       .then((res) => res.json())
-      .then((data) => {})
+      .then((data) => { })
       .catch((err) => console.log(err));
   };
 
@@ -128,34 +128,6 @@ const MyAccount = () => {
                       {/* <a href="javascript:void(0)">Resend confirmation</a> */}
                     </div>
                   </div>
-                  <div className="form-group">
-                    <label className="form-label">Phone</label>
-                    <input
-                      type="text"
-                      value={userInfo.phone}
-                      onChange={(e) => {
-                        setUserInfo((prev) => ({
-                          ...prev,
-                          phone: e.target.value,
-                        }));
-                      }}
-                      className="form-control mb-1"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label className="form-label">Company</label>
-                    <input
-                      type="text"
-                      value={userInfo.company}
-                      onChange={(e) => {
-                        setUserInfo((prev) => ({
-                          ...prev,
-                          company: e.target.value,
-                        }));
-                      }}
-                      className="form-control"
-                    />
-                  </div>
                 </div>
               </div>
             </div>
@@ -178,11 +150,13 @@ const MyAccount = () => {
         >
           Log out
         </button>
+
         <button
           type="button"
           onClick={(e) => {
             navigate("/myOrder");
           }}
+          className="btn btn-primary"
         >
           My order
         </button>

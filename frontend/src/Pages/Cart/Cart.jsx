@@ -12,16 +12,33 @@ const Cart = () => {
     addToCart,
     getTotalCartAmount,
   } = useContext(StoreContext);
-  // console.log(food_list);
-  return (
-    <div className="cart">
-      <div className="cart-items">
-        <div className="cart-items-title">
-          <p>Items</p> <p>Title</p> <p>Price (VND)</p> <p>Quantity</p>{" "}
-          <p>Total (VND)</p>
-        </div>
-        <br />
-        <hr />
+
+  const handleCart = (e) => {
+    e.preventDefault();
+    let isOk = true;
+    if (!localStorage["user"]) {
+      isOk = false;
+      alert("Please login.");
+    }
+
+    console.log(getTotalCartAmount());
+    if (Object.keys(cartItems).length === 0 || getTotalCartAmount() === 0) {
+      isOk = false;
+      alert("Your cart is empty;");
+    }
+    if (isOk) navigate("/order");
+  };
+
+  if (Object.keys(cartItems).length !== 0) {
+    return (
+      <div className="cart">
+        <div className="cart-items">
+          <div className="cart-items-title">
+            <p>Items</p> <p>Title</p> <p>Price (VND)</p> <p>Quantity</p>{" "}
+            <p>Total (VND)</p>
+          </div>
+          <br />
+          <hr />
 
           {food_list.map((item, index) => {
             if (cartItems[item.product_id] > 0) {

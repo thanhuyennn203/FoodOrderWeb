@@ -1,24 +1,16 @@
-import menu_main_course from "./menu_main_course.jpg";
-import menu_appertizer from "./menu_appetizers.jpg";
-import menu_dessert from "./menu_dessert.jpg";
-import menu_beverage from "./menu_beverages.jpg";
-import rate_img from "./rate.png";
+
 import basket_icon from "./basket_icon.png";
 import logo from "./logo.png";
 import header_img from "./header_img.png";
 import search_icon from "./search_icon.png";
 import cross_icon from "./cross_icon.png";
-import food_41 from "./41.jpg";
-import food_42 from "./42.jpg";
-import food_43 from "./43.jpg";
-import food_44 from "./44.jpg";
-import food_45 from "./45.jpg";
-import food_46 from "./46.jpg";
-import food_47 from "./47.jpg";
-import food_80 from "./80.jpg";
+
 import user_icon from "./user_icon.png";
 import add_icon from "./add_icon.png";
 import remove_icon from "./remove_icon.png";
+import facebook from "./facebook_icon.png";
+import linkedin from "./linkedin_icon.png";
+import twitter from "./twitter_icon.png"
 
 export const assets = {
   logo,
@@ -29,6 +21,10 @@ export const assets = {
   user_icon,
   add_icon,
   remove_icon,
+  facebook,
+  linkedin,
+  twitter
+
 };
 
 // export const menu_list = [

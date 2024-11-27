@@ -14,7 +14,7 @@ const Header = () => {
         <img src="./header2-img.png" alt="Royal Blue Shrimp Packages" />
         <p className="product-name">Mực xào dưa leo</p>
         <p className="price">45,000 VND</p>
-        <button className="details-button">DETAILS</button>
+        <button className="details-button">Details</button>
       </div>
 
       {/* Phần sản phẩm nổi bật */}

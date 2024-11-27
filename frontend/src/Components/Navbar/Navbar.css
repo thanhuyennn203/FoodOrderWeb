@@ -11,16 +11,16 @@
     z-index: 1000; 
     background-color: rgb(254, 245, 216); 
     border-bottom: 1.5px solid rgb(82, 100, 0); 
-    padding: 10px 0; 
 
 }
 .navbar .logo {
     width: 120px;
     margin-left: 40px;
+    margin-top: 0px;
 }
 
 .navbar-menu {
-    padding-top: 20px;
+    padding-top: 10px;
     display: flex;
     list-style: none;
     gap: 20px;
@@ -65,6 +65,7 @@
 
 
 .navbar-right button {
+    margin-top: 20px;
     font-size: 16px;
     background-color: rgb(73, 85, 126);
     color: rgb(254, 245, 216); 
