@@ -40,7 +40,7 @@ const MyOrders = () => {
           {data.map((order, index) => {
             return (
               <div key={index} className="my-orders-order">
-                <img src="" alt="" />
+                <img src="./parcel_icon.png" alt="" />
                 <p>
                   {order.items.map((item, index) => {
                     if (index === order.items.length - 1) {
@@ -66,7 +66,7 @@ const MyOrders = () => {
   } else {
     return (
       <div className="my-orders">
-        <p>You haven't ordered anything.</p>
+        <p className="empty-orders">You haven't ordered anything.</p>
       </div>
     );
   }

@@ -24,7 +24,7 @@ async function loginUser(req, res) {
     }
 
     // Nếu đăng nhập thành công
-    res.status(200).json({ success: true, userId: user.user_id });
+    res.status(200).json(user.user_id);
   } catch (err) {
     // Xử lý lỗi server
     res.status(500).json({ success: false, message: "Error during login!" });

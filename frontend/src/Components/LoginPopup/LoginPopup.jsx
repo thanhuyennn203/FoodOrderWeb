@@ -64,6 +64,7 @@ const LoginPopup = ({ setShowLogin }) => {
             setShowLogin(false);
             showToast("Login Successful!", "success");
             navigate("/");
+            console.log(data);
             login(data);
           })
           .catch((err) => {

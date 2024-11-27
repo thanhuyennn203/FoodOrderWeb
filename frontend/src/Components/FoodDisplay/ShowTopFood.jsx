@@ -42,7 +42,7 @@ const ShowTopFood = () => {
     <div className="food-display" id="food-display">
       <h2>
         <FaBowlFood />
-        Top food
+        Best saler
       </h2>
 
       <input
