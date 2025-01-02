@@ -48,7 +48,7 @@ const Cart = () => {
                   <div className="cart-items-title cart-items-item">
                     <img src={imgPath} alt="" />
                     <p>{item.name}</p>
-                    <p>{item.price} VND</p>
+                    <p>{item.price},000 VND</p>
                     <div className="quantity">
                       <p
                         className="cart-items-remove-icon"

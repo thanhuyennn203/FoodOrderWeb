@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import FoodItem from "../FoodItem/FoodItem";
 import "./FoodDisplay.css";
 import { FaBowlFood } from "react-icons/fa6";
+import { StoreContext } from "../../Context/StoreContext";
 
 const FoodDisplay = ({ category }) => {
-  const [food_list, setFoodList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const [searchQuery, setSearchQuery] = useState("");
 
-  useEffect(() => {
-    fetch("http://localhost:8801/api/products")
-      .then((res) => res.json())
-      .then((data) => {
-        setFoodList(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const { food_list } = useContext(StoreContext);
 
   useEffect(() => {
     setCurrentPage(1);

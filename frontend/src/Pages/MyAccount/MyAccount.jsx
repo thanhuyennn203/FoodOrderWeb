@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../Context/StoreContext";
 import { useNavigate } from "react-router-dom";
+import { showToast } from "../../Components/Notification/ToastProvider";
 
 const MyAccount = () => {
   const { user, logout } = useContext(StoreContext);
@@ -21,10 +22,19 @@ const MyAccount = () => {
         },
         body: JSON.stringify({ userId }),
       })
-        .then((res) => res.json())
+        .then((response) => {
+          if (!response.ok) {
+            return response.json().then((error) => {
+              throw new Error(
+                error.message || "Failed to view account information."
+              );
+            });
+          }
+          return response.json();
+        })
         .then((data) => {
           const acc = data[0];
-          console.log(acc);
+          // console.log(acc);
           setUserInfo({
             fullname: acc.full_name,
             email: acc.email,
@@ -32,28 +42,48 @@ const MyAccount = () => {
             company: acc.company,
           });
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          showToast(err.message, "error");
+          console.log(err);
+        });
+    } else {
+      showToast("You haven't login yet", "info");
     }
   }, [user]); // Đảm bảo hook này chạy khi `user` thay đổi
 
   const handleEditAccount = (e) => {
     e.preventDefault();
-    console.log("edit: ", userInfo);
-    fetch("http://localhost:8801/api/editAccount", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userInfo }),
-    })
-      .then((res) => res.json())
-      .then((data) => {})
-      .catch((err) => console.log(err));
+    if (user) {
+      fetch("http://localhost:8801/api/editAccount", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userInfo }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            return response.json().then((error) => {
+              throw new Error(error.message || "Failed to edit user");
+            });
+          }
+          return response.json();
+        })
+        .then((data) => {
+          showToast("Update account successfully!");
+        })
+        .catch((err) => {
+          console.log(err);
+          showToast(err.message, "error");
+        });
+    }
   };
 
   const handleLogout = () => {
-    logout();
-    window.location.reload();
+    if (user) {
+      logout();
+      window.location.reload();
+    }
   };
 
   return (
@@ -180,6 +210,7 @@ const MyAccount = () => {
         </button>
         <button
           type="button"
+          className="btn btn-default"
           onClick={(e) => {
             navigate("/myOrder");
           }}

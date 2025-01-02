@@ -28,13 +28,7 @@ const Navbar = ({ setShowLogin }) => {
         >
           Menu
         </a>
-        <a
-          href="#explore-menu"
-          onClick={() => setMenu("sale")}
-          className={`${menu === "sale" ? "active" : ""}`}
-        >
-          Product in sale
-        </a>
+
         <a
           href="#Blogs"
           onClick={() => setMenu("Blogs")}

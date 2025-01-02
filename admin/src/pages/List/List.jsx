@@ -1,65 +1,104 @@
-import React, { useEffect, useState } from 'react'
-import './List.css'
-import { url, currency } from '../../assets/assets'
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import React, { useEffect, useState } from "react";
+import "./List.css";
+import { showToast } from "../../components/Notification/ToastProvider";
 
 const List = () => {
-
-  const [list, setList] = useState([]);
-
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const [food_list, setFoodList] = useState([]);
   const fetchList = async () => {
-    const response = await axios.get(`${url}/api/food/list`)
-    if (response.data.success) {
-      setList(response.data.data);
+    try {
+      const res = await fetch("http://localhost:8801/api/products");
+      if (!res.ok) {
+        throw new Error("Failed to fetch product list.");
+      }
+      const data = await res.json();
+      setFoodList(data);
+    } catch (err) {
+      console.error("Error fetching product list:", err.message);
     }
-    else {
-      toast.error("Error")
-    }
-  }
+  };
 
-  const removeFood = async (foodId) => {
-    const response = await axios.post(`${url}/api/food/remove`, {
-      id: foodId
-    })
-    await fetchList();
-    if (response.data.success) {
-      toast.success(response.data.message);
+  const removeFood = async (product_id) => {
+    try {
+      const response = await fetch("http://localhost:8801/api/removeItem", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ product_id }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || `Failed to remove item ${product_id}`);
+      }
+
+      await response.json();
+      showToast("Deleted successfully!");
+
+      // Chờ 2 giây trước khi fetch danh sách mới
+      await delay(2000);
+
+      // Fetch updated product list after deletion
+      await fetchList();
+    } catch (err) {
+      showToast(err.message, "error");
+      console.error("Error removing item:", err.message);
     }
-    else {
-      toast.error("Error")
-    }
-  }
+  };
 
   useEffect(() => {
     fetchList();
-  }, [])
+  }, []);
 
   return (
-    <div className='list add flex-col'>
+    <div className="list add flex-col">
       <p>All Foods List</p>
-      <div className='list-table'>
-        <div className="list-table-format title">
-          <b>Image</b>
-          <b>Name</b>
-          <b>Category</b>
-          <b>Price</b>
-          <b>Action</b>
-        </div>
-        {list.map((item, index) => {
-          return (
-            <div key={index} className='list-table-format'>
-              <img src={`${url}/images/` + item.image} alt="" />
-              <p>{item.name}</p>
-              <p>{item.category}</p>
-              <p>{currency}{item.price}</p>
-              <p className='cursor' onClick={() => removeFood(item._id)}>x</p>
-            </div>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
+      <table className="list-table">
+        <thead className="thead-dark">
+          <th scope="col">#</th>
+          <th scope="col">Image</th>
+          <th scope="col">Product ID</th>
+          <th scope="col">Name</th>
 
-export default List
+          <th scope="col">Category ID</th>
+          <th scope="col">Category Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </thead>
+        <tbody>
+          {food_list.map((item, index) => {
+            const imgPath = "public/" + item.thumbnail + ".jpg";
+
+            return (
+              // <div key={index} className="list-table-format">
+              <tr key={index} className="list-table-format">
+                <td scope="row">{index + 1}</td>
+                <td>
+                  <img src={imgPath} alt="" />
+                </td>
+                <td>{item.product_id}</td>
+                <td>{item.name}</td>
+                <td>{item.category_id}</td>
+                <td>on upload</td>
+                <td>{item.price},000 vnd</td>
+                {/*<td>{item.description}</td> */}
+                <td>{item.deleted}</td>
+                <td
+                  className="cursor"
+                  onClick={() => removeFood(item.product_id)}
+                >
+                  x
+                </td>
+              </tr>
+              // </div>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default List;

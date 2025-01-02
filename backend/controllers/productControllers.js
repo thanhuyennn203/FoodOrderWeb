@@ -22,4 +22,37 @@ const getMenuList = async (red, res) => {
   }
 };
 
-module.exports = { getProductList, getMenuList };
+const getTopProductList = async (req, res) => {
+  try {
+    const topList = await productModel.getAllTopFoodList();
+    res.status(200).json(topList);
+  } catch {
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to get top food list!" });
+  }
+};
+
+const removeFoodItem = async (req, res) => {
+  try {
+    const { product_id } = req.body;
+    const result = productModel.removeFoodItemFromList(product_id);
+    if (result) {
+      res.status(200).json({
+        success: true,
+        message: "remove " + [product_id] + "sucessfully",
+      });
+    }
+  } catch {
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to remove!" + product_id });
+  }
+};
+
+module.exports = {
+  getProductList,
+  getMenuList,
+  getTopProductList,
+  removeFoodItem,
+};
