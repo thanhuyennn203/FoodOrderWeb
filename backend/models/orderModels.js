@@ -82,9 +82,33 @@ function selectOrderDetail(orderId) {
   });
 }
 
+function selectAllOrders() {
+  return new Promise((resolve, reject) => {
+    const sql = "Select * from `customer_order` ORDER BY `order_date` DESC";
+
+    db.query(sql, (err, res) => {
+      if (err) return reject(err);
+      return resolve(res);
+    });
+  });
+}
+
+function changeOrderStatus(order_status, order_id) {
+  return new Promise((resolve, reject) => {
+    const sql = "UPDATE `customer_order` SET `status`= ? WHERE `order_id`= ?";
+
+    db.query(sql, [order_status, order_id], (err, res) => {
+      if (err) return reject(err);
+      return resolve(res);
+    });
+  });
+}
+
 module.exports = {
   createUserOrder,
   createOrderDetail,
   selectOrderDetail,
   selectOrderByUserId,
+  selectAllOrders,
+  changeOrderStatus,
 };

@@ -51,7 +51,7 @@ const MyOrders = () => {
                   })}
                 </p>
 
-                <p>${order.amount},000</p>
+                <p>{order.amount},000 VND</p>
                 <p>Items: {order.items.length}</p>
                 <p>
                   <span>&#x25cf;</span> <b>{order.status}</b>

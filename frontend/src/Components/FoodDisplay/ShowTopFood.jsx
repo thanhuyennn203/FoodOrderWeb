@@ -45,13 +45,13 @@ const ShowTopFood = () => {
         Best saler
       </h2>
 
-      <input
+      {/* <input
         type="text"
         placeholder="Search for food..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         className="search-input"
-      />
+      /> */}
 
       <div className="food-display-list">
         {currentItems.map((item, index) => {

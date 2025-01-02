@@ -69,7 +69,9 @@ const MyAccount = () => {
           }
           return response.json();
         })
-        .then((data) => {})
+        .then((data) => {
+          showToast("Update account successfully!");
+        })
         .catch((err) => {
           console.log(err);
           showToast(err.message, "error");
